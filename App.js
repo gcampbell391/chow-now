@@ -1,21 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View } from 'react-native';
+import * as Font from 'expo-font'
+import { AppLoading } from 'expo'
+import MealsNavigator from './navigation/MealsNavigator'
+
+
+//This fetches font styles
+const fetchFonts = () => {
+  return Font.loadAsync({
+    'raleway-bold': require('./assets/fonts/Raleway-Bold.ttf'),
+    'raleway-thin': require('./assets/fonts/Raleway-Thin.ttf')
+  })
+}
 
 export default function App() {
+
+  const [fontLoaded, setFontLoaded] = useState(false)
+
+  //This will keep the splash screen open until the fonts are loaded
+  if (!fontLoaded) {
+    return <AppLoading startAsync={fetchFonts} onFinish={() => setFontLoaded(true)} />
+  }
+
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <MealsNavigator />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
