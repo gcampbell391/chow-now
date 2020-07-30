@@ -8,8 +8,9 @@ import MealsNavigator from './navigation/MealsNavigator'
 //This fetches font styles
 const fetchFonts = () => {
   return Font.loadAsync({
-    'raleway-bold': require('./assets/fonts/Raleway-Bold.ttf'),
-    'raleway-thin': require('./assets/fonts/Raleway-Thin.ttf')
+    'raleway-bold': require('./assets/fonts/Raleway-ExtraBold.ttf'),
+    'raleway-thin': require('./assets/fonts/Raleway-Thin.ttf'),
+    'raleway-italic': require('./assets/fonts/Raleway-SemiBoldItalic.ttf')
   })
 }
 

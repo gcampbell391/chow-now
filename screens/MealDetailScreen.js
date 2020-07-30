@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-
+import Colors from '../constants/Colors'
 
 const MealDetailScreen = (props) => {
 
@@ -9,6 +9,20 @@ const MealDetailScreen = (props) => {
             <Text>MealDetailScreen</Text>
         </View>
     )
+}
+
+MealDetailScreen.navigationOptions = {
+    title: 'Details',
+    headerStyle: {
+        backgroundColor: Colors.primaryColor,
+        height: 100
+    },
+    headerTintColor: 'white',
+    headerTitleStyle: {
+        fontFamily: 'raleway-bold',
+        fontSize: 35,
+        textAlign: 'center'
+    }
 }
 
 const styles = StyleSheet.create({
