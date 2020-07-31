@@ -3,27 +3,27 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity, Platform } from 're
 
 import { CATEGORIES } from '../data/category-data'
 import Colors from '../constants/Colors'
+import CategoryTile from '../components/CategoryTile'
 
 const CategoriesScreen = (props) => {
 
     //Renders a single category item
     const renderGridItem = (itemData) => {
         return (
-            <TouchableOpacity style={styles.gridItem} onPress={() => {
-                props.navigation.navigate({
-                    routeName: 'CategoryMeals', params: {
-                        categoryId: itemData.item.id
-                    }
-                })
-            }}>
-                <View>
-                    <Text>
-                        {itemData.item.title}
-                    </Text>
-                </View>
-            </TouchableOpacity>
+            <CategoryTile
+                title={itemData.item.title}
+                color={itemData.item.color}
+                onSelect={() => {
+                    props.navigation.navigate({
+                        routeName: 'CategoryMeals', params: {
+                            categoryId: itemData.item.id
+                        }
+                    })
+                }} />
         )
     }
+
+
     return (
         <FlatList
             keyExtractor={(item, index) => item.id}
@@ -33,32 +33,12 @@ const CategoriesScreen = (props) => {
     )
 }
 
-//Styles the navigation heaer
-CategoriesScreen.navigationOptions = {
-    title: 'Chow Now',
-    headerStyle: {
-        backgroundColor: Colors.primaryColor,
-        height: 100
-    },
-    headerTintColor: 'white',
-    headerTitleStyle: {
-        fontFamily: 'raleway-bold',
-        fontSize: 55,
-        textAlign: 'center'
-    }
-}
-
 
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    gridItem: {
-        flex: 1,
-        margin: 15,
-        height: 250,
     }
 })
 

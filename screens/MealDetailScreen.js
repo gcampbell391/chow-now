@@ -12,17 +12,7 @@ const MealDetailScreen = (props) => {
 }
 
 MealDetailScreen.navigationOptions = {
-    title: 'Details',
-    headerStyle: {
-        backgroundColor: Colors.primaryColor,
-        height: 100
-    },
-    headerTintColor: 'white',
-    headerTitleStyle: {
-        fontFamily: 'raleway-bold',
-        fontSize: 35,
-        textAlign: 'center'
-    }
+    title: 'Details'
 }
 
 const styles = StyleSheet.create({

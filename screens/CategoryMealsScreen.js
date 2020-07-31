@@ -20,21 +20,12 @@ const CategoryMealsScreen = (props) => {
     )
 }
 
+//Sets the header title to the selected category
 CategoryMealsScreen.navigationOptions = (navigationData) => {
     const catID = navigationData.navigation.getParam('categoryId')
     const selectedCategory = CATEGORIES.find(cat => cat.id === catID)
     return {
-        title: selectedCategory.title,
-        headerStyle: {
-            backgroundColor: Colors.primaryColor,
-            height: 100
-        },
-        headerTintColor: 'white',
-        headerTitleStyle: {
-            fontFamily: 'raleway-bold',
-            fontSize: 35,
-            textAlign: 'center'
-        }
+        title: selectedCategory.title
     }
 }
 
