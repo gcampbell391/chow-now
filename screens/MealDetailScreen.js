@@ -2,6 +2,8 @@ import React from 'react'
 import { View, Text, StyleSheet, ImageBackground, FlatList, ScrollView, Button } from 'react-native'
 import Colors from '../constants/Colors'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import HeaderButton from '../components/HeaderButton'
 
 const MealDetailScreen = (props) => {
 
@@ -84,7 +86,12 @@ const MealDetailScreen = (props) => {
 MealDetailScreen.navigationOptions = (navigationData) => {
     const meal = navigationData.navigation.getParam('meal')
     return {
-        title: meal.title
+        title: meal.title,
+        headerRight: <HeaderButtons HeaderButtonComponent={HeaderButton}>
+            <Item title='Favorite' iconName='ios-star' onPress={() => {
+                console.log('Mark as Favorite')
+            }} />
+        </HeaderButtons>
     }
 }
 
@@ -119,7 +126,7 @@ const styles = StyleSheet.create({
         marginVertical: 3
     },
     ingredientsList: {
-        marginHorizontal: 50,
+        marginHorizontal: 90,
         marginBottom: 10
     },
     stepsList: {
