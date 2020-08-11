@@ -6,11 +6,12 @@ import MealDetailScreen from '../screens/MealDetailScreen'
 import { createAppContainer } from 'react-navigation'
 import Colors from '../constants/Colors'
 
+
 const MealsNavigator = createStackNavigator({
     Categories: {
         screen: CategoriesScreen,
         navigationOptions: {
-            title: 'Chow Now'
+            title: 'Food Dude'
         }
     },
     CategoryMeals: CategoryMealsScreen,

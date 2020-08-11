@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end'
     },
     title: {
-        fontFamily: 'raleway-italic',
+        fontFamily: 'raleway-bold',
         fontSize: 20,
         textAlign: 'right'
     }
