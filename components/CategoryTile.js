@@ -45,8 +45,12 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'raleway-bold',
-        fontSize: 20,
-        textAlign: 'right'
+        fontSize: 18,
+        textAlign: 'right',
+        color: 'white',
+        textShadowColor: 'rgba(0, 0, 0, 0.9)',
+        textShadowOffset: { width: -1, height: 1 },
+        textShadowRadius: 2
     }
 })
 

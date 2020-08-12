@@ -4,6 +4,7 @@ import Colors from '../constants/Colors'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import HeaderButton from '../components/HeaderButton'
+import { Ionicons } from '@expo/vector-icons'
 
 const MealDetailScreen = (props) => {
 
@@ -17,7 +18,7 @@ const MealDetailScreen = (props) => {
     const lactoseIcon = <FontAwesome5 name={'cheese'} brands size={20} color={'#f5d142'} />;
     const ingredientIcon = <FontAwesome5 name={'check-circle'} brands size={20} color={'#41d95d'} />;
     const favoriteIcon = <FontAwesome5 name={'heart'} brands size={20} color={'#ff6347'} />;
-
+    const favStarIcon = <Ionicons name='ios-star' size={25} color='black' />
 
 
 
@@ -45,7 +46,7 @@ const MealDetailScreen = (props) => {
                 <Text style={styles.ingredientsTitle}>{ingredientsIcon} Ingredients</Text>
                 <View style={styles.ingredientsList}>
                     {meal.ingredients.map(ingredient => {
-                        return <View style={styles.ingredientItem}><Text>{ingredientIcon} {ingredient}</Text></View>
+                        return <View style={styles.ingredientItem} key={ingredient}><Text>{ingredientIcon} {ingredient}</Text></View>
                     })}
                 </View>
                 <View
@@ -59,7 +60,7 @@ const MealDetailScreen = (props) => {
                 <Text style={styles.ingredientsTitle}>{directionsIcon} Directions</Text>
                 <View style={styles.stepsList}>
                     {meal.steps.map(step => {
-                        return <View style={styles.stepItem}><Text>{counter++}. {step}</Text></View>
+                        return <View style={styles.stepItem} key={step}><Text>{counter++}. {step}</Text></View>
                     })}
                 </View>
                 <View
@@ -71,23 +72,21 @@ const MealDetailScreen = (props) => {
                     }}
                 />
                 <View style={styles.favorite}>
-                    <Text> {favoriteIcon} Add this recipe to your favorites?</Text>
+                    <Text style={{ fontSize: 18, marginVertical: 10 }}> {favoriteIcon}Want to add this recipe to your favorites?</Text>
+                    <Text> Click the on the {favStarIcon} on the top right!</Text>
                 </View>
             </ScrollView>
         </View>
     )
 }
 
-// MealDetailScreen.navigationOptions = {
-//     title: 'Details'
-// }
 
 //Sets the header title to the selected category
 MealDetailScreen.navigationOptions = (navigationData) => {
     const meal = navigationData.navigation.getParam('meal')
     return {
         title: meal.title,
-        headerRight: <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        headerRight: () => <HeaderButtons HeaderButtonComponent={HeaderButton}>
             <Item title='Favorite' iconName='ios-star' onPress={() => {
                 console.log('Mark as Favorite')
             }} />

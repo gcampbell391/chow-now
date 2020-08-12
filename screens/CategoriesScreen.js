@@ -1,8 +1,10 @@
 import React from 'react'
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Platform } from 'react-native'
-
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { CATEGORIES } from '../data/category-data'
-import Colors from '../constants/Colors'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import HeaderButton from '../components/HeaderButton'
+
 import CategoryTile from '../components/CategoryTile'
 
 const CategoriesScreen = (props) => {
@@ -33,6 +35,18 @@ const CategoriesScreen = (props) => {
     )
 }
 
+
+CategoriesScreen.navigationOptions = (navData) => {
+    return {
+        title: `Food Dude`,
+        headerRight: () => <HeaderButtons HeaderButtonComponent={HeaderButton}>
+            <Item title='menu' iconName='ios-menu' onPress={() => {
+                navData.navigation.toggleDrawer()
+            }} />
+        </HeaderButtons>,
+        headerLeft: () => <FontAwesome5 name={'hamburger'} brands size={25} color='white' style={{ marginLeft: 10 }} />
+    }
+}
 
 const styles = StyleSheet.create({
     screen: {

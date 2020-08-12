@@ -1,36 +1,16 @@
 import React from 'react'
-import { View, Text, StyleSheet, Button, FlatList } from 'react-native'
-import Colors from '../constants/Colors'
-
 import { CATEGORIES, MEALS } from '../data/category-data'
-import MealItem from '../components/MealItem'
-
+import MealList from '../components/MealList'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import HeaderButton from '../components/HeaderButton'
 
 const CategoryMealsScreen = (props) => {
 
     const catID = props.navigation.getParam('categoryId')
-
     const displayedMeals = MEALS.filter(meal => meal.categoryIds.indexOf(catID) >= 0)
 
-    const renderMealItem = itemData => {
-        return <MealItem meal={itemData.item} onSelectMeal={() => {
-            props.navigation.navigate({
-                routeName: 'MealDetails', params: {
-                    meal: itemData.item
-                }
-            })
-        }} />
-    }
-
     return (
-        <View style={styles.screen}>
-            <FlatList
-                data={displayedMeals}
-                keyExtractor={(item, index) => item.id}
-                renderItem={renderMealItem}
-                style={{ width: '95%' }}
-            />
-        </View>
+        <MealList meals={displayedMeals} navigation={props.navigation} />
     )
 }
 
@@ -39,17 +19,14 @@ CategoryMealsScreen.navigationOptions = (navigationData) => {
     const catID = navigationData.navigation.getParam('categoryId')
     const selectedCategory = CATEGORIES.find(cat => cat.id === catID)
     return {
-        title: selectedCategory.title
+        title: selectedCategory.title,
+        headerRight: () => <HeaderButtons HeaderButtonComponent={HeaderButton}>
+            <Item title='menu' iconName='ios-menu' onPress={() => {
+                navigationData.navigation.toggleDrawer()
+            }} />
+        </HeaderButtons>,
     }
 }
 
-const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white'
-    }
-})
 
 export default CategoryMealsScreen

@@ -14,9 +14,9 @@ const MealItem = (props) => {
                         </ImageBackground>
                     </View>
                     <View style={{ ...styles.mealRow, ...styles.mealDetails }}>
-                        <Text>{props.meal.complexity.toUpperCase()}</Text>
-                        <Text>{props.meal.affordability.toUpperCase()}</Text>
-                        <Text>{props.meal.duration} m</Text>
+                        <Text style={styles.mealDetail}>{props.meal.complexity.toUpperCase()}</Text>
+                        <Text style={styles.mealDetail}>{props.meal.affordability.toUpperCase()}</Text>
+                        <Text style={styles.mealDetail}>{props.meal.duration} m</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -31,10 +31,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#f5f5f5',
         marginVertical: 10,
         borderRadius: 10,
-        overflow: 'hidden'
+        overflow: 'hidden',
     },
     mealRow: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+
     },
     mealHeader: {
         height: '85%'
@@ -42,7 +43,11 @@ const styles = StyleSheet.create({
     mealDetails: {
         paddingHorizontal: 10,
         justifyContent: "space-between",
-        alignItems: 'center'
+        alignItems: 'center',
+    },
+    mealDetail: {
+
+        padding: 5
     },
     bgImage: {
         height: '100%',
@@ -56,8 +61,9 @@ const styles = StyleSheet.create({
     },
     title: {
         color: 'white',
-        fontSize: 20,
-        textAlign: 'center'
+        fontSize: 15,
+        textAlign: 'center',
+        fontFamily: 'raleway-bold'
     }
 
 })
