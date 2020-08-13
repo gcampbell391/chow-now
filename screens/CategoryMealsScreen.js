@@ -1,13 +1,29 @@
 import React from 'react'
-import { CATEGORIES, MEALS } from '../data/category-data'
+import { View, Text, StyleSheet } from 'react-native'
+import { useSelector } from 'react-redux'
+import { CATEGORIES } from '../data/category-data'
 import MealList from '../components/MealList'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import HeaderButton from '../components/HeaderButton'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
 
 const CategoryMealsScreen = (props) => {
 
     const catID = props.navigation.getParam('categoryId')
-    const displayedMeals = MEALS.filter(meal => meal.categoryIds.indexOf(catID) >= 0)
+    const availableMeals = useSelector(state => state.meals.filteredMeals)
+
+    const displayedMeals = availableMeals.filter(meal => meal.categoryIds.indexOf(catID) >= 0)
+
+    if (displayedMeals.length === 0 || !displayedMeals) {
+        return (
+            <View style={styles.noMealsView}>
+                <Text style={{ fontFamily: 'raleway-bold', fontSize: 20 }}>No Food Dude Foods Found Here! </Text>
+                <FontAwesome5 name={'drumstick-bite'} brands size={50} color='burlywood' style={{ marginTop: 10 }} />
+                <Text style={{ fontFamily: 'raleway-bold', fontSize: 16, marginTop: 10 }}>Check your filters if you need to </Text>
+
+            </View>)
+    }
 
     return (
         <MealList meals={displayedMeals} navigation={props.navigation} />
@@ -28,5 +44,14 @@ CategoryMealsScreen.navigationOptions = (navigationData) => {
     }
 }
 
+
+const styles = StyleSheet.create({
+    noMealsView: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    }
+})
 
 export default CategoryMealsScreen

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Platform } from 'react-native'
+import { StyleSheet, FlatList } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { CATEGORIES } from '../data/category-data'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
@@ -35,7 +35,7 @@ const CategoriesScreen = (props) => {
     )
 }
 
-
+//Navigation options for the Categories screen
 CategoriesScreen.navigationOptions = (navData) => {
     return {
         title: `Food Dude`,
@@ -48,6 +48,7 @@ CategoriesScreen.navigationOptions = (navData) => {
     }
 }
 
+//Stylesheet
 const styles = StyleSheet.create({
     screen: {
         flex: 1,

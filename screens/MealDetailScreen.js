@@ -1,15 +1,41 @@
-import React from 'react'
-import { View, Text, StyleSheet, ImageBackground, FlatList, ScrollView, Button } from 'react-native'
-import Colors from '../constants/Colors'
+import React, { useEffect, useCallback } from 'react'
+import { View, Text, StyleSheet, ImageBackground, ScrollView } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import HeaderButton from '../components/HeaderButton'
 import { Ionicons } from '@expo/vector-icons'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleFavorite } from '../store/actions/meals';
 
 const MealDetailScreen = (props) => {
 
+    //Selected Meal from previous screen
     const meal = props.navigation.getParam('meal')
+    const mealID = meal.id
+
+    //Check if current meal exists in favorite meals
+    const currentMealIsFavorite = useSelector(state => state.meals.favoriteMeals.some(meal => meal.id === mealID))
+
+    //Action to handle fav toggle
+    const dispatch = useDispatch()
+    const toggleFavoriteHandler = useCallback(() => {
+        dispatch(toggleFavorite(meal.id))
+    }, [dispatch, meal])
+
+    //This allows navigation options to access the function created above
+    useEffect(() => {
+        props.navigation.setParams({ toggleFav: toggleFavoriteHandler })
+    }, [toggleFavoriteHandler])
+
+    //This allows navigation options to access currentMealIsFavorite
+    useEffect(() => {
+        props.navigation.setParams({ isFav: currentMealIsFavorite })
+    }, [currentMealIsFavorite])
+
+    //Counter for the steps
     let counter = 1;
+
+    //Icons 
     const ingredientsIcon = <FontAwesome5 name={'utensils'} brands size={20} />;
     const directionsIcon = <FontAwesome5 name={'clipboard-list'} brands size={20} />;
     const veganIcon = <FontAwesome5 name={'seedling'} brands size={20} color={'#41d95d'} />;
@@ -18,7 +44,7 @@ const MealDetailScreen = (props) => {
     const lactoseIcon = <FontAwesome5 name={'cheese'} brands size={20} color={'#f5d142'} />;
     const ingredientIcon = <FontAwesome5 name={'check-circle'} brands size={20} color={'#41d95d'} />;
     const favoriteIcon = <FontAwesome5 name={'heart'} brands size={20} color={'#ff6347'} />;
-    const favStarIcon = <Ionicons name='ios-star' size={25} color='black' />
+    const favStarIcon = <Ionicons name='ios-star-outline' size={25} color='black' />
 
 
 
@@ -72,7 +98,7 @@ const MealDetailScreen = (props) => {
                     }}
                 />
                 <View style={styles.favorite}>
-                    <Text style={{ fontSize: 18, marginVertical: 10 }}> {favoriteIcon}Want to add this recipe to your favorites?</Text>
+                    <Text style={{ fontSize: 18, marginVertical: 10 }}> {favoriteIcon} Want to add this recipe to your favorites?</Text>
                     <Text> Click the on the {favStarIcon} on the top right!</Text>
                 </View>
             </ScrollView>
@@ -84,16 +110,18 @@ const MealDetailScreen = (props) => {
 //Sets the header title to the selected category
 MealDetailScreen.navigationOptions = (navigationData) => {
     const meal = navigationData.navigation.getParam('meal')
+    const toggleFavorite = navigationData.navigation.getParam('toggleFav')
+    const isFav = navigationData.navigation.getParam('isFav')
+
     return {
         title: meal.title,
         headerRight: () => <HeaderButtons HeaderButtonComponent={HeaderButton}>
-            <Item title='Favorite' iconName='ios-star' onPress={() => {
-                console.log('Mark as Favorite')
-            }} />
+            <Item title='Favorite' iconName={isFav ? 'ios-star' : 'ios-star-outline'} onPress={toggleFavorite} />
         </HeaderButtons>
     }
 }
 
+//Stylesheet
 const styles = StyleSheet.create({
     screen: {
         width: '100%',
