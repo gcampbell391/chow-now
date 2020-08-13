@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image, Platform } from 'react-native'
 import { useSelector } from 'react-redux'
 import { CATEGORIES } from '../data/category-data'
 import MealList from '../components/MealList'
@@ -18,6 +18,7 @@ const CategoryMealsScreen = (props) => {
     if (displayedMeals.length === 0 || !displayedMeals) {
         return (
             <View style={styles.noMealsView}>
+                <Image source={require('../assets/images/foodDude3.png')} style={styles.image} />
                 <Text style={{ fontFamily: 'raleway-bold', fontSize: 20 }}>No Food Dude Foods Found Here! </Text>
                 <FontAwesome5 name={'drumstick-bite'} brands size={50} color='burlywood' style={{ marginTop: 10 }} />
                 <Text style={{ fontFamily: 'raleway-bold', fontSize: 16, marginTop: 10 }}>Check your filters if you need to </Text>
@@ -49,8 +50,12 @@ const styles = StyleSheet.create({
     noMealsView: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-
+        backgroundColor: 'white'
+    },
+    image: {
+        height: 280,
+        marginTop: Platform.OS === 'android' ? -20 : -20,
+        marginBottom: 50
     }
 })
 

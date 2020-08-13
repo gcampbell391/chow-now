@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, FlatList } from 'react-native'
+import { StyleSheet, FlatList, ImageBackground } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { CATEGORIES } from '../data/category-data'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
@@ -27,11 +27,13 @@ const CategoriesScreen = (props) => {
 
 
     return (
-        <FlatList
-            keyExtractor={(item, index) => item.id}
-            data={CATEGORIES}
-            numColumns={2}
-            renderItem={renderGridItem} />
+        <ImageBackground source={require('../assets/images/foodDude4.png')} style={{ resizeMode: "cover", justifyContent: "center" }}>
+            <FlatList
+                keyExtractor={(item, index) => item.id}
+                data={CATEGORIES}
+                numColumns={2}
+                renderItem={renderGridItem} />
+        </ImageBackground>
     )
 }
 
@@ -53,7 +55,8 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'white'
     }
 })
 

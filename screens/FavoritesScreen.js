@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ImageBackground, Platform } from 'react-native'
 import { useSelector } from 'react-redux'
 import MealList from '../components/MealList'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -12,9 +12,9 @@ const FavoritesScreen = (props) => {
 
     if (favortieMeals.length === 0 || !favortieMeals) {
         return (
-            <View style={styles.noFavMealsView}>
-                <Text style={{ fontFamily: 'raleway-bold', fontSize: 20 }}>No Food Dude Favs Added yet! </Text><FontAwesome5 name={'sad-tear'} brands size={50} color='black' style={{ marginTop: 10 }} />
-            </View>
+            <ImageBackground source={require('../assets/images/foodDude2.png')} style={styles.image} >
+                <Text style={styles.message}>No Food Dude Favs Added yet! </Text>
+            </ImageBackground>
         )
     }
 
@@ -39,8 +39,20 @@ const styles = StyleSheet.create({
     noFavMealsView: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-
+        backgroundColor: 'white'
+    },
+    image: {
+        height: '100%',
+        resizeMode: "cover",
+        justifyContent: "center"
+    },
+    message: {
+        fontFamily: 'raleway-bold',
+        fontSize: 20,
+        textAlign: 'center',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        color: 'white',
+        padding: 10
     }
 })
 

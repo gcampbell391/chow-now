@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, Switch, Platform, Button } from 'react-native'
+import { View, Text, StyleSheet, Switch, Platform, Button, Image } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import HeaderButton from '../components/HeaderButton'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -24,6 +24,7 @@ const FiltersScreen = (props) => {
 
     return (
         <View style={styles.screen}>
+            <Image source={require('../assets/images/foodDude1.png')} style={styles.image} />
             <Text style={styles.title}>Current Filter Settings</Text>
             <View style={styles.filterContainer}>
                 <Text style={styles.filterTitle}>{lactoseIcon} Lactose Free</Text>
@@ -73,7 +74,8 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'white'
     },
     filterContainer: {
         flexDirection: 'row',
@@ -86,10 +88,14 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontFamily: 'raleway-bold',
         fontSize: 25,
-        marginVertical: 30
+        marginVertical: 20
     },
     filterTitle: {
         fontSize: 18
+    },
+    image: {
+        height: 280,
+        marginTop: Platform.OS === 'android' ? -50 : -30
     }
 })
 
